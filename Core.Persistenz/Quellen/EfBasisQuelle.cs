@@ -1,6 +1,8 @@
 ﻿using Core.Persistenz.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Core.Persistenz.Quellen;
@@ -16,14 +18,20 @@ public class EfBasisQuelle<TEinheit, TKontext> : IAsyncQuelle<TEinheit>, IQuelle
         Context = context;
     }
 
-    public Task<TEinheit?> GeheZurAsync(Expression<Func<TEinheit, bool>> Praedikat)
+    public async Task<TEinheit?> GeheZurAsync(Expression<Func<TEinheit, bool>> praedikat)
     {
-        throw new NotImplementedException();
+        return await Context.Set<TEinheit>().FirstOrDefaultAsync(praedikat);
     }
 
-    public Task<IPaginierung<TEinheit>> GeheZurListeAsync(Expression<Func<TEinheit, bool>>? predicate = null, Func<IQueryable<TEinheit>, IOrderedQueryable<TEinheit>>? orderBy = null, Func<IQueryable<TEinheit>, IIncludableQueryable<TEinheit, object>>? include = null, int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default)
+    public async Task<IPaginierung<TEinheit>> GeheZurListeAsync(Expression<Func<TEinheit, bool>>? predicate = null, Func<IQueryable<TEinheit>, IOrderedQueryable<TEinheit>>? orderBy = null, Func<IQueryable<TEinheit>, IIncludableQueryable<TEinheit, object>>? include = null, int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        IQueryable<TEinheit> queryable = Abfrage();
+        if (!enableTracking) queryable = queryable.AsNoTracking();
+        if (include != null) queryable = include(queryable);
+        if (predicate != null) queryable = queryable.Where(predicate);
+        if (orderBy != null)
+            return await orderBy(queryable).ZumPaginierenAsync(index, size, 0, cancellationToken);
+        return await queryable.ZumPaginierenAsync(index, size, 0, cancellationToken);
     }
 
     public Task<IPaginierung<TEinheit>> GeheZurListeNachDynamischAsync(Dynamik.Dynamik dynamik, Func<IQueryable<TEinheit>, IIncludableQueryable<TEinheit, object>>? include = null, int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default)
@@ -46,5 +54,10 @@ public class EfBasisQuelle<TEinheit, TKontext> : IAsyncQuelle<TEinheit>, IQuelle
     public Task<TEinheit> LöschenAsync(TEinheit einheit)
     {
         throw new NotImplementedException();
+    }
+
+    public IQueryable<TEinheit> Abfrage()
+    {
+        return Context.Set<TEinheit>();
     }
 }

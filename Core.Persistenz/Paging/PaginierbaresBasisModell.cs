@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace Core.Persistenz.Paging
 {
-    public interface IPaginierung<T>
+    public class PaginierbaresBasisModell
     {
-        int Von { get; }
         int Index { get; }
-        int Grösse { get; }
+        int Size { get; }
         int Zaehlen { get; }
         int Seiten { get; }
-        IList<T> Element { get; }
         bool HatVorheriges { get; }
         bool HatNaechstes { get; }
     }

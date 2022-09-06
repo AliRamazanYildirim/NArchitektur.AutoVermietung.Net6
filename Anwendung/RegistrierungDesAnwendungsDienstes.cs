@@ -1,4 +1,6 @@
 ﻿using Anwendung.Eigenschaften.Marken.Regeln;
+using Core.Anwendung.Rohrleitungen.Validierung;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,11 +18,16 @@ namespace Anwendung
         {
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<MarkeEinheitGeschaeftsRegeln>();
 
-            
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AnforderungsValidierungsVerhalten<,>));
+
+
 
             return services;
 

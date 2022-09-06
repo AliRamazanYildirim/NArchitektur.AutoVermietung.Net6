@@ -8,6 +8,6 @@ namespace Core.Persistenz.Quellen
 {
     public interface IAbfrage<T>
     {
-        //IQueryable<T> Abfrage();
+        IQueryable<T> Abfrage();
     }
 }

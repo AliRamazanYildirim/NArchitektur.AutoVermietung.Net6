@@ -1,5 +1,6 @@
 ﻿using Anwendung.Dienste.Quellen;
 using Core.Persistenz.Paging;
+using Core.Persistenz.Quellen;
 using Core.QuerSchnittsBedenken.Ausnahmen;
 using Domain.Einheiten;
 using System;
@@ -21,8 +22,18 @@ namespace Anwendung.Eigenschaften.Marken.Regeln
         }
         public async Task NameDerMarkenKannBeimEinfügenNichtDupliziertWerden(string name)
         {
-            IPaginierung<Marke> result = await _markeQuelle.GeheZurListeAsync(b => b.Name == name);
-            if (result.Element.Any()) throw new GeschaeflicheAusnahmen("SomeFeatureEntity name exists.");
+            IPaginierung<Marke> result = await _markeQuelle.GeheZurListeAsync(m => m.Name == name);
+            if (result.Element.Any()) throw new AusnahmeFürTransaktion("Markenname existiert.");
+        }
+        //public async Task MarkeSollteAufAnfrageVorhandenSein(int id)
+        //{
+        //    Marke? marke = await _markeQuelle.GeheZurAsync(m => m.Id == id);
+
+        //    if (marke==null) throw new AusnahmeFürTransaktion("Angeforderte Marke existiert nicht.");
+        //}
+        public async Task MarkeSollteAufAnfrageVorhandenSein(Marke marke)
+        {
+            if (marke == null) throw new AusnahmeFürTransaktion("Angeforderte Marke existiert nicht.");
         }
     }
 }

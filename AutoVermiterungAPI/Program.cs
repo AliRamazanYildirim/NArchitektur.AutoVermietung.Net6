@@ -1,4 +1,5 @@
 using Anwendung;
+using Core.QuerSchnittsBedenken.Ausnahmen;
 using Persistenz;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+if (app.Environment.IsProduction())
+    app.BenutzerdefinierteAusnahmeMiddlewareKonfigurieren();
 app.UseAuthorization();
 
 app.MapControllers();

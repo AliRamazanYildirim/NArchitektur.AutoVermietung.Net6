@@ -1,6 +1,8 @@
 ﻿using Anwendung.Eigenschaften.Marken.Befehle.ErstellenMarke;
 using Anwendung.Eigenschaften.Marken.Düoe;
+using Anwendung.Eigenschaften.Marken.Modelle;
 using AutoMapper;
+using Core.Persistenz.Paging;
 using Domain.Einheiten;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,9 @@ namespace Anwendung.Eigenschaften.Marken.Profil
         {
             CreateMap<Marke, MarkeEinheitDüo>().ReverseMap();
             CreateMap<Marke, ErstellenMarkeEinheitsBefehl>().ReverseMap();
+            CreateMap<IPaginierung<Marke>, MarkeListeModell>().ReverseMap();
+            CreateMap<Marke, MarkeListeDüo>().ReverseMap();
+            CreateMap<Marke, NachMarkeIdAbrufenDüo>().ReverseMap();
         }
     }
 }
