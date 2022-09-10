@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistenz.Kontexte;
 
@@ -10,9 +11,10 @@ using Persistenz.Kontexte;
 namespace Persistenz.Migrations
 {
     [DbContext(typeof(BasisDbKontext))]
-    partial class BasisDbKontextModelSnapshot : ModelSnapshot
+    [Migration("20220910182919_Modelle_Erstellen")]
+    partial class Modelle_Erstellen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

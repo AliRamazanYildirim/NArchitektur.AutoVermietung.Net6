@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Folder Include="Eigenschaften\Marken\Konstanten\" />
+    <Folder Include="Eigenschaften\Modelle\Befehle\" />
+    <Folder Include="Eigenschaften\Modelle\Konstanten\" />
+    <Folder Include="Eigenschaften\Modelle\Regeln\" />
   </ItemGroup>
 
   <ItemGroup>

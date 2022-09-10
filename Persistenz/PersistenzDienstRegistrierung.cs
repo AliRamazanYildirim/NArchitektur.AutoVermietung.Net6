@@ -21,6 +21,7 @@ namespace Persistenz
                  options.UseSqlServer(
                  configuration.GetConnectionString("AutoVermiterungConnectionString")));
             services.AddScoped<IMarkeQuelle, MarkeQuelle>();
+            services.AddScoped<IModellQuelle, ModellQuelle>();
 
             return services;
         }

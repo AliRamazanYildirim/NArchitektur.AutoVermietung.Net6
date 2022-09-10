@@ -1,5 +1,5 @@
-﻿using Anwendung.Eigenschaften.Marken.Abfragen.MarkeListeAbrufen;
-using Anwendung.Eigenschaften.Marken.Abfragen.NachMarkeIdAbrufen;
+﻿using Anwendung.Eigenschaften.Marken.Abfragen.MarkeListeAufrufen;
+using Anwendung.Eigenschaften.Marken.Abfragen.NachMarkeIdAufrufen;
 using Anwendung.Eigenschaften.Marken.Befehle.ErstellenMarke;
 using Anwendung.Eigenschaften.Marken.Düoe;
 using Anwendung.Eigenschaften.Marken.Modelle;
@@ -16,7 +16,7 @@ namespace AutoVermiterungAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GeheZurListe([FromQuery] SeiteAnfrage seiteAnfrage)
         {
-            AbfrageDerListeMarkeAbrufen abfrageDerListeMarkeAbrufen = new() { SeiteAnfrage = seiteAnfrage };
+            AbfrageDerListeMarke abfrageDerListeMarkeAbrufen = new() { SeiteAnfrage = seiteAnfrage };
             MarkeListeModell resultat = await Mediator.Send(abfrageDerListeMarkeAbrufen);
             return Ok(resultat);
 
@@ -29,7 +29,7 @@ namespace AutoVermiterungAPI.Controllers
             return Created("", resultat);
         }
         [HttpGet("{Id}")]
-        public async Task<IActionResult> NachIdAbrufen([FromRoute] AbfrageNachMarkeIdAbrufen abfrageNachMarkeId)
+        public async Task<IActionResult> NachIdAbrufen([FromRoute] AbfrageNachMarkeId abfrageNachMarkeId)
         {
             NachMarkeIdAbrufenDüo nachMarkeIdAbrufenDüo= await Mediator.Send(abfrageNachMarkeId);
             return Ok(nachMarkeIdAbrufenDüo);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Domain.Einheiten
     public class Marke:Einheit
     {
         public string Name { get; set; }
+        public virtual ICollection<Modell> Modelle { get; set; }
         public Marke()
         {
 

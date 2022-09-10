@@ -11,14 +11,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anwendung.Eigenschaften.Marken.Abfragen.MarkeListeAbrufen
+namespace Anwendung.Eigenschaften.Marken.Abfragen.MarkeListeAufrufen
 {
 
-    public class AbfrageDerListeMarkeAbrufen:IRequest<MarkeListeModell>
+    public class AbfrageDerListeMarke:IRequest<MarkeListeModell>
     {
         public SeiteAnfrage SeiteAnfrage { get; set; }
 
-        public class AbfrageDerListeMarkeAbrufenHandler : IRequestHandler<AbfrageDerListeMarkeAbrufen, MarkeListeModell>
+        public class AbfrageDerListeMarkeAbrufenHandler : IRequestHandler<AbfrageDerListeMarke, MarkeListeModell>
         {
             private readonly IMarkeQuelle _markeQuelle;
             private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace Anwendung.Eigenschaften.Marken.Abfragen.MarkeListeAbrufen
                 _mapper = mapper;
             }
 
-            public async Task<MarkeListeModell> Handle(AbfrageDerListeMarkeAbrufen request, CancellationToken cancellationToken)
+            public async Task<MarkeListeModell> Handle(AbfrageDerListeMarke request, CancellationToken cancellationToken)
             {
                 IPaginierung<Marke> marken=await _markeQuelle.GeheZurListeAsync(index: request.SeiteAnfrage.Seite,
                     size: request.SeiteAnfrage.Seitengrösse);
