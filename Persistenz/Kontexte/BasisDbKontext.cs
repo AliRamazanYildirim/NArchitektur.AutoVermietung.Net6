@@ -1,4 +1,5 @@
-﻿using Domain.Einheiten;
+﻿using Core.Sicherheit.Einheiten;
+using Domain.Einheiten;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -14,7 +15,11 @@ namespace Persistenz.Kontexte
         protected IConfiguration Configuration { get; set; }
         public DbSet<Marke> Marken { get; set; }
         public DbSet<Modell> Modelle { get; set; }
-       
+        public DbSet<Benutzer> Benutzer { get; set; }
+        public DbSet<OperationsAnspruch> OperationsAnspruch { get; set; }
+        public DbSet<BenutzerOperationsAnspruch> BenutzerOperationsAnspruch { get; set; }
+        public DbSet<TokenAktualisieren> TokenAktualisieren { get; set; }
+
 
         public BasisDbKontext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
         {

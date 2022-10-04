@@ -22,6 +22,12 @@ namespace Persistenz
                  configuration.GetConnectionString("AutoVermiterungConnectionString")));
             services.AddScoped<IMarkeQuelle, MarkeQuelle>();
             services.AddScoped<IModellQuelle, ModellQuelle>();
+            services.AddScoped<IBenutzerQuelle, BenutzerQuelle>();
+            services.AddScoped<ITokenAktualisierenQuelle, TokenAktualisierenQuelle>();
+            services.AddScoped<IOperationsAnspruchQuelle, OperationsAnspruchQuelle>();
+            services.AddScoped<IBenutzerOperationsAnspruchQuelle, BenutzerOperationsAnspruchQuelle>();
+
+
 
             return services;
         }

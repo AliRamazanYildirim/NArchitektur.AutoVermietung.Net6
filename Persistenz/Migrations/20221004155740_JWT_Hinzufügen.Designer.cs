@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistenz.Kontexte;
 
@@ -11,9 +12,10 @@ using Persistenz.Kontexte;
 namespace Persistenz.Migrations
 {
     [DbContext(typeof(BasisDbKontext))]
-    partial class BasisDbKontextModelSnapshot : ModelSnapshot
+    [Migration("20221004155740_JWT_Hinzufügen")]
+    partial class JWT_Hinzufügen
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

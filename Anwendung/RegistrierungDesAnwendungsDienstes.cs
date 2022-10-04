@@ -1,4 +1,6 @@
-﻿using Anwendung.Eigenschaften.Marken.Regeln;
+﻿using Anwendung.Dienste.AuthDienst;
+using Anwendung.Eigenschaften.Authen.Regeln;
+using Anwendung.Eigenschaften.Marken.Regeln;
 using Core.Anwendung.Rohrleitungen.Validierung;
 using FluentValidation;
 using MediatR;
@@ -22,12 +24,14 @@ namespace Anwendung
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<MarkeEinheitGeschaeftsRegeln>();
+            services.AddScoped<AuthGeschaeftsRegeln>();
+
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AnforderungsValidierungsVerhalten<,>));
 
-
+            services.AddScoped<IAuthDienst, AuthManager>();
 
             return services;
 
